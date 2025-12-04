@@ -88,7 +88,7 @@ const bearCQueries = {
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
-            SELECT DISTINCT ?dataset ?distribution ?URL from <http://bike-csecu/BearC> WHERE {
+            SELECT DISTINCT ?dataset ?distribution ?URL from <BearC.ttl> WHERE {
               ?dataset rdf:type ?c1.
               ?c1 owl:valueAs dcat:Dataset .
               ?dataset dcat:distribution ?c2.
@@ -109,7 +109,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?dataset ?modified_date from <http://bike-csecu/BearC>  WHERE {
+SELECT DISTINCT ?dataset ?modified_date from <BearC.ttl>  WHERE {
  
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -130,7 +130,7 @@ PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?dataset ?contact ?name ?email from <http://bike-csecu/BearC> WHERE
+SELECT DISTINCT ?dataset ?contact ?name ?email from <BearC.ttl> WHERE
 {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -175,7 +175,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX eu: <http://ec.europa.eu/geninfo/>
-SELECT DISTINCT ?dataset ?distribution ?URL  from <http://bike-csecu/BearC>  WHERE {
+SELECT DISTINCT ?dataset ?distribution ?URL  from <BearC.ttl>  WHERE {
  
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -213,7 +213,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
-SELECT DISTINCT ?dataset ?distribution ?URL  from <http://bike-csecu/BearC>  WHERE
+SELECT DISTINCT ?dataset ?distribution ?URL  from <BearC.ttl>  WHERE
 {
   {
     ?dataset rdf:type ?c1.
@@ -307,7 +307,7 @@ FILTER (
   PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
   PREFIX dcat: <http://www.w3.org/ns/dcat#>
   PREFIX dc: <http://purl.org/dc/terms/>
-  SELECT DISTINCT ?dataset ?distribution ?URL  from <http://bike-csecu/BearC>  WHERE
+  SELECT DISTINCT ?dataset ?distribution ?URL  from <BearC.ttl>  WHERE
   {
     
     ?dataset rdf:type ?c1.
@@ -353,7 +353,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 
-SELECT DISTINCT ?dataset ?distribution ?title ?URL  from <http://bike-csecu/BearC> WHERE { 
+SELECT DISTINCT ?dataset ?distribution ?title ?URL  from <BearC.ttl> WHERE { 
 
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -412,7 +412,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?dataset ?distribution ?filetitle ?description  from <http://bike-csecu/BearC>  WHERE {
+SELECT DISTINCT ?dataset ?distribution ?filetitle ?description  from <BearC.ttl>  WHERE {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
     ?dataset dc:title ?c2.
@@ -478,7 +478,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 
-SELECT DISTINCT ?dataset ?URL1 ?titleFile1 ?description1  from <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?dataset ?URL1 ?titleFile1 ?description1  from <BearC.ttl> WHERE {
 
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -581,7 +581,7 @@ FILTER (
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
-SELECT DISTINCT ?dataset ?distribution ?URL ?mediaType ?description from <http://bike-csecu/BearC> WHERE 
+SELECT DISTINCT ?dataset ?distribution ?URL ?mediaType ?description from <BearC.ttl> WHERE 
 {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -652,7 +652,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
-SELECT DISTINCT ?dataset ?distribution ?URL from <http://bike-csecu/BearC>
+SELECT DISTINCT ?dataset ?distribution ?URL from <BearC.ttl>
 WHERE {
   ?dataset rdf:type ?c1.
   ?c1 owl:valueAs dcat:Dataset.
@@ -699,7 +699,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?dataset ?modified_date FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?dataset ?modified_date FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -736,7 +736,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT DISTINCT ?dataset ?contact ?name ?email FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?dataset ?contact ?name ?email FROM <BearC.ttl>
 WHERE {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset.
@@ -792,7 +792,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX eu: <http://ec.europa.eu/geninfo/>
-SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -828,7 +828,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
-SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <http://bike-csecu/BearC> WHERE
+SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE
 {
   {
     ?dataset rdf:type ?c1.
@@ -894,7 +894,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
-SELECT DISTINCT ?dataset ?title ?date FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?dataset ?title ?date FROM <BearC.ttl> WHERE {
 
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset.
@@ -929,7 +929,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 
-SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <http://bike-csecu/BearC> WHERE { 
+SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE { 
 
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -966,7 +966,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?dataset ?title ?distribution ?URL ?filetitle ?description FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?dataset ?title ?distribution ?URL ?filetitle ?description FROM <BearC.ttl> WHERE {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
     ?dataset dc:title ?c2.
@@ -1012,7 +1012,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?dataset ?title ?distr1 ?URL1 ?titleFile1 ?description1 ?distr2 ?URL2 ?titleFile2 ?description2 FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?dataset ?title ?distr1 ?URL1 ?titleFile1 ?description1 ?distr2 ?URL2 ?titleFile2 ?description2 FROM <BearC.ttl>
 WHERE {
   ?dataset rdf:type ?c1.
   ?c1 owl:valueAs dcat:Dataset.
@@ -1081,7 +1081,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?dataset ?title ?distribution ?URL ?mediaType ?filetitle ?description FROM <http://bike-csecu/BearC> WHERE 
+SELECT DISTINCT ?dataset ?title ?distribution ?URL ?mediaType ?filetitle ?description FROM <BearC.ttl> WHERE 
 {
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -1128,7 +1128,7 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
  
    ?dataset rdf:type ?c1.
      ?c1 owl:valueAs dcat:Dataset.
@@ -1178,7 +1178,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
     ?c1 owl:valueAs dcat:Dataset .
@@ -1218,7 +1218,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
 WHERE {
 
 
@@ -1290,7 +1290,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX eu: <http://ec.europa.eu/geninfo/>
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
  WHERE {
 
     ?dataset rdf:type ?c1.
@@ -1372,7 +1372,7 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl:  <http://www.w3.org/2002/07/owl/>
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
   
 {
 {
@@ -1530,7 +1530,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
 
     
     ?dataset rdf:type ?c1.
@@ -1600,7 +1600,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC> WHERE 
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE 
 { 
   
     ?dataset rdf:type ?c1.
@@ -1682,7 +1682,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
   
     ?dataset rdf:type ?c1. 
     ?c1 owl:valueAs dcat:Dataset.
@@ -1793,7 +1793,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC>
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
 WHERE {
 
 
@@ -1980,7 +1980,7 @@ PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <http://bike-csecu/BearC> WHERE {
+SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
   
 
   ?dataset rdf:type ?c1. 
