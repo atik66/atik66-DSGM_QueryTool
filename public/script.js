@@ -82,7 +82,7 @@ const versionSelections = {
 
 // ---------- Bear C queries ----------
 const bearCQueries = {
-  vm: {1: `PREFIX owl: <http://www.w3.org/2002/07/owl/>
+  vm: {1: `PREFIX dsgm: <http://www.bike-csecu.com/version/>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -90,20 +90,20 @@ const bearCQueries = {
 
             SELECT DISTINCT ?dataset ?distribution ?URL from <BearC.ttl> WHERE {
               ?dataset rdf:type ?c1.
-              ?c1 owl:valueAs dcat:Dataset .
+              ?c1 dsgm:objectValue dcat:Dataset .
               ?dataset dcat:distribution ?c2.
-              ?c2 owl:valueAs ?distribution .
+              ?c2 dsgm:objectValue ?distribution .
               ?distribution dcat:accessURL ?c3.
-              ?c3 owl:valueAs ?URL .
-              ?c3 owl:timeinfo ?time.
-              ?time owl:fromdate ?fromdate.
-              ?time owl:todate ?todate.
+              ?c3 dsgm:objectValue ?URL .
+              ?c3 dsgm: timemeta ?time.
+              ?time dsgm:todate ?fromdate.
+              ?time dsgm:todate ?todate.
           FILTER (
            (BOUND(?fromdate) && xsd:integer(?fromdate) <= version) &&
            (BOUND(?todate) && (xsd:integer(?todate) >= version || ?todate = "9999"))
          )
     }`,
-    2: `PREFIX owl: <http://www.w3.org/2002/07/owl/>
+    2: `PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -112,13 +112,13 @@ PREFIX dc: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?dataset ?modified_date from <BearC.ttl>  WHERE {
  
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:modified ?c2.
-    ?c2 owl:valueAs ?modified_date .   
-    ?c2 owl:timeinfo ?time2.
+    ?c2 dsgm:objectValue ?modified_date .   
+    ?c2 dsgm: timemeta ?time2.
     
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
    
    FILTER (
   ( xsd:integer(?fromdate2) <= version) &&
@@ -128,22 +128,22 @@ SELECT DISTINCT ?dataset ?modified_date from <BearC.ttl>  WHERE {
 3: `PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?dataset ?contact ?name ?email from <BearC.ttl> WHERE
 {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dcat:contactPoint ?c2.
-    ?c2 owl:valueAs ?contact .
+    ?c2 dsgm:objectValue ?contact .
     ?contact vcard:fn ?c3.
-    ?c3 owl:valueAs ?name.
+    ?c3 dsgm:objectValue ?name.
      OPTIONAL{
         ?contact vcard:hasEmail ?c4 .
-        ?c4 owl:valueAs ?email.
-        ?c4 owl:timeinfo ?time4.
-        ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
+        ?c4 dsgm:objectValue ?email.
+        ?c4 dsgm: timemeta ?time4.
+        ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
   FILTER(
      (BOUND(?fromdate4) && xsd:integer(?fromdate4) <= version) &&
      (BOUND(?todate4) && xsd:integer(?todate4) >= version || ?todate4="9999")
@@ -152,13 +152,13 @@ SELECT DISTINCT ?dataset ?contact ?name ?email from <BearC.ttl> WHERE
   }
 
     
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
 
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
  
   
 FILTER (
@@ -169,7 +169,7 @@ FILTER (
 
 )
 }`,
-4: `PREFIX owl: <http://www.w3.org/2002/07/owl/>
+4: `PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -178,22 +178,22 @@ PREFIX eu: <http://ec.europa.eu/geninfo/>
 SELECT DISTINCT ?dataset ?distribution ?URL  from <BearC.ttl>  WHERE {
  
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution.
+    ?c3 dsgm:objectValue ?distribution.
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:license ?c5.
-    ?c5 owl:valueAs eu:legal_notices_en.htm .
+    ?c5 dsgm:objectValue eu:legal_notices_en.htm .
     FILTER regex(?title, "region")
-    ?c2 owl:timeinfo ?time1.
-    ?c3 owl:timeinfo ?time2.
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
+    ?c2 dsgm: timemeta ?time1.
+    ?c3 dsgm: timemeta ?time2.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
    
   
 FILTER (
@@ -208,7 +208,7 @@ FILTER (
 
 )
 }`,
-5:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+5:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -217,32 +217,32 @@ SELECT DISTINCT ?dataset ?distribution ?URL  from <BearC.ttl>  WHERE
 {
   {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Austria" .
+    ?c5 dsgm:objectValue "Austria" .
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
 FILTER (
   (BOUND(?fromdate1) && xsd:integer(?fromdate1) <= version) &&
   (BOUND(?fromdate2) && xsd:integer(?fromdate2) <= version) &&
@@ -261,32 +261,32 @@ FILTER (
   UNION
   {
      ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Germany".
+    ?c5 dsgm:objectValue "Germany".
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
 FILTER (
   (BOUND(?fromdate1) && xsd:integer(?fromdate1) <= version ) &&
   (BOUND(?fromdate2) && xsd:integer(?fromdate2) <= version  ) &&
@@ -302,7 +302,7 @@ FILTER (
     
   }
 }`,
-6:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+6:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
   PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -311,28 +311,28 @@ FILTER (
   {
     
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
     ?dataset dc:modified ?c4.
-    ?c4 owl:valueAs ?date.
+    ?c4 dsgm:objectValue ?date.
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
    
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
     
 FILTER (
   (BOUND(?fromdate1) && xsd:integer(?fromdate1) <= version) &&
@@ -351,41 +351,41 @@ FILTER (
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 
 SELECT DISTINCT ?dataset ?distribution ?title ?URL  from <BearC.ttl> WHERE { 
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
     ?dataset dcat:distribution ?c4.
-    ?c4 owl:valueAs ?distribution .
+    ?c4 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c5.
-    ?c5 owl:valueAs ?URL .
+    ?c5 dsgm:objectValue ?URL .
     FILTER (?date>"2014-12-31T23:59:59"^^xsd:dateTime)
 
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
    
     
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
     
 
 
@@ -410,47 +410,47 @@ SELECT DISTINCT ?dataset ?distribution ?title ?URL  from <BearC.ttl> WHERE {
 8: `PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?dataset ?distribution ?filetitle ?description  from <BearC.ttl>  WHERE {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs "text/csv" .
+    ?c5 dsgm:objectValue "text/csv" .
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
-    ?c6 owl:timeinfo ?time6.
-    ?c7 owl:timeinfo ?time7.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
+    ?c6 dsgm: timemeta ?time6.
+    ?c7 dsgm: timemeta ?time7.
 
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
-    ?time6 owl:fromdate ?fromdate6.
-    ?time6 owl:todate ?todate6.
-    ?time7 owl:fromdate ?fromdate7.
-    ?time7 owl:todate ?todate7.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
+    ?time6 dsgm:todate ?fromdate6.
+    ?time6 dsgm:todate ?todate6.
+    ?time7 dsgm:todate ?fromdate7.
+    ?time7 dsgm:todate ?todate7.
 
      
 FILTER (
@@ -476,73 +476,73 @@ FILTER (
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 
 SELECT DISTINCT ?dataset ?URL1 ?titleFile1 ?description1  from <BearC.ttl> WHERE {
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?distr1 dcat:distribution ?c3.
-    ?c3 owl:valueAs ?dataset.
+    ?c3 dsgm:objectValue ?dataset.
     ?distr1 dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL1 .
+    ?c4 dsgm:objectValue ?URL1 .
     ?distr1 dcat:mediaType ?c5.
-    ?c5 owl:valueAs "text/csv" .
+    ?c5 dsgm:objectValue "text/csv" .
     ?distr1 dc:title ?c6.
-    ?c6 owl:valueAs ?titleFile1.
+    ?c6 dsgm:objectValue ?titleFile1.
     ?distr1 dc:description ?c7.
-    ?c7 owl:valueAs ?description1 .
+    ?c7 dsgm:objectValue ?description1 .
     ?distr2 dcat:distribution ?c8.
-    ?c8 owl:valueAs ?dataset .
+    ?c8 dsgm:objectValue ?dataset .
     ?distr2 dcat:accessURL ?c9.
-    ?c9 owl:valueAs ?URL2 .
+    ?c9 dsgm:objectValue ?URL2 .
     ?distr2 dcat:mediaType ?c10.
-    ?c10 owl:valueAs "text/tab-separated-values" .
+    ?c10 dsgm:objectValue "text/tab-separated-values" .
     ?distr2 dc:title ?c11.
-    ?c11 owl:valueAs ?titleFile2 .
+    ?c11 dsgm:objectValue ?titleFile2 .
     ?distr2 dc:description ?c12.
-    ?c12 owl:valueAs ?description2 .
+    ?c12 dsgm:objectValue ?description2 .
 
 
-    ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
-    ?c6 owl:timeinfo ?time6.
-    ?c7 owl:timeinfo ?time7.
-    ?c8 owl:timeinfo ?time8.
-    ?c9 owl:timeinfo ?time9.
-    ?c10 owl:timeinfo ?time10.
-    ?c11 owl:timeinfo ?time11.
-    ?c12 owl:timeinfo ?time12.
+    ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
+    ?c6 dsgm: timemeta ?time6.
+    ?c7 dsgm: timemeta ?time7.
+    ?c8 dsgm: timemeta ?time8.
+    ?c9 dsgm: timemeta ?time9.
+    ?c10 dsgm: timemeta ?time10.
+    ?c11 dsgm: timemeta ?time11.
+    ?c12 dsgm: timemeta ?time12.
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
-    ?time6 owl:fromdate ?fromdate6.
-    ?time6 owl:todate ?todate6.
-    ?time7 owl:fromdate ?fromdate7.
-    ?time7 owl:todate ?todate7.
-    ?time8 owl:fromdate ?fromdate8.
-    ?time8 owl:todate ?todate8.
-    ?time9 owl:fromdate ?fromdate9.
-    ?time9 owl:todate ?todate9.
-    ?time10 owl:fromdate ?fromdate10.
-    ?time10 owl:todate ?todate10.
-    ?time11 owl:fromdate ?fromdate11.
-    ?time11 owl:todate ?todate11.
-    ?time12 owl:fromdate ?fromdate12.
-    ?time12 owl:todate ?todate12.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
+    ?time6 dsgm:todate ?fromdate6.
+    ?time6 dsgm:todate ?todate6.
+    ?time7 dsgm:todate ?fromdate7.
+    ?time7 dsgm:todate ?todate7.
+    ?time8 dsgm:todate ?fromdate8.
+    ?time8 dsgm:todate ?todate8.
+    ?time9 dsgm:todate ?fromdate9.
+    ?time9 dsgm:todate ?todate9.
+    ?time10 dsgm:todate ?fromdate10.
+    ?time10 dsgm:todate ?todate10.
+    ?time11 dsgm:todate ?fromdate11.
+    ?time11 dsgm:todate ?todate11.
+    ?time12 dsgm:todate ?fromdate12.
+    ?time12 dsgm:todate ?todate12.
 
 
 
@@ -580,47 +580,47 @@ FILTER (
   PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 SELECT DISTINCT ?dataset ?distribution ?URL ?mediaType ?description from <BearC.ttl> WHERE 
 {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs ?mediaType .
+    ?c5 dsgm:objectValue ?mediaType .
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
 
-     ?c1 owl:timeinfo ?time1.
-    ?c2 owl:timeinfo ?time2.
-    ?c3 owl:timeinfo ?time3.
-    ?c4 owl:timeinfo ?time4.
-    ?c5 owl:timeinfo ?time5.
-    ?c6 owl:timeinfo ?time6.
-    ?c7 owl:timeinfo ?time7.
+     ?c1 dsgm: timemeta ?time1.
+    ?c2 dsgm: timemeta ?time2.
+    ?c3 dsgm: timemeta ?time3.
+    ?c4 dsgm: timemeta ?time4.
+    ?c5 dsgm: timemeta ?time5.
+    ?c6 dsgm: timemeta ?time6.
+    ?c7 dsgm: timemeta ?time7.
 
 
-    ?time1 owl:fromdate ?fromdate1.
-    ?time1 owl:todate ?todate1.
-    ?time2 owl:fromdate ?fromdate2.
-    ?time2 owl:todate ?todate2.
-    ?time3 owl:fromdate ?fromdate3.
-    ?time3 owl:todate ?todate3.
-    ?time4 owl:fromdate ?fromdate4.
-    ?time4 owl:todate ?todate4.
-    ?time5 owl:fromdate ?fromdate5.
-    ?time5 owl:todate ?todate5.
-    ?time6 owl:fromdate ?fromdate6.
-    ?time6 owl:todate ?todate6.
-    ?time7 owl:fromdate ?fromdate7.
-    ?time7 owl:todate ?todate7.
+    ?time1 dsgm:todate ?fromdate1.
+    ?time1 dsgm:todate ?todate1.
+    ?time2 dsgm:todate ?fromdate2.
+    ?time2 dsgm:todate ?todate2.
+    ?time3 dsgm:todate ?fromdate3.
+    ?time3 dsgm:todate ?todate3.
+    ?time4 dsgm:todate ?fromdate4.
+    ?time4 dsgm:todate ?todate4.
+    ?time5 dsgm:todate ?fromdate5.
+    ?time5 dsgm:todate ?todate5.
+    ?time6 dsgm:todate ?fromdate6.
+    ?time6 dsgm:todate ?todate6.
+    ?time7 dsgm:todate ?fromdate7.
+    ?time7 dsgm:todate ?todate7.
 
      
 FILTER (
@@ -646,7 +646,7 @@ FILTER (
 ORDER BY ?filetitle
 LIMIT 100 OFFSET 100`
 },
-  dm: { 1: `PREFIX owl: <http://www.w3.org/2002/07/owl/>
+  dm: { 1: `PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -655,45 +655,45 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 SELECT DISTINCT ?dataset ?distribution ?URL from <BearC.ttl>
 WHERE {
   ?dataset rdf:type ?c1.
-  ?c1 owl:valueAs dcat:Dataset.
+  ?c1 dsgm:objectValue dcat:Dataset.
   ?dataset dcat:distribution ?c2.
-  ?c2 owl:valueAs ?distribution.
+  ?c2 dsgm:objectValue ?distribution.
   ?distribution dcat:accessURL ?c3.
-  ?c3 owl:valueAs ?URL.
+  ?c3 dsgm:objectValue ?URL.
 
   # Ensure the triple was valid in version 10
   {
  
-    ?c1 owl:timeinfo ?timeC1.
-    ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.
+    ?c1 dsgm: timemeta ?timeC1.
+    ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.
     FILTER( xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion )
 
-    ?c2 owl:timeinfo ?timeC2.
-    ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.
+    ?c2 dsgm: timemeta ?timeC2.
+    ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.
     FILTER( xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion )
 
-    ?c3 owl:timeinfo ?timeC3.
-    ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.
+    ?c3 dsgm: timemeta ?timeC3.
+    ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.
     FILTER( xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion )
   }
 
   # Exclude the triple if it was revalidated in version 33
   FILTER NOT EXISTS {
-    ?c1 owl:timeinfo ?timeC1_2.
-    ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.
+    ?c1 dsgm: timemeta ?timeC1_2.
+    ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.
     FILTER( xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion )
 
-    ?c2 owl:timeinfo ?timeC2_2.
-    ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.
+    ?c2 dsgm: timemeta ?timeC2_2.
+    ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.
     FILTER( xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion )
 
-    ?c3 owl:timeinfo ?timeC3_2.
-    ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.
+    ?c3 dsgm: timemeta ?timeC3_2.
+    ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.
     FILTER( xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion )
   }
 }`,
 
-2: `PREFIX owl: <http://www.w3.org/2002/07/owl/>
+2: `PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -702,29 +702,29 @@ PREFIX dc: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?dataset ?modified_date FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:modified ?c2.
-    ?c2 owl:valueAs ?modified_date .  
+    ?c2 dsgm:objectValue ?modified_date .  
     {
  
-    ?c1 owl:timeinfo ?timeC1.
-    ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.
+    ?c1 dsgm: timemeta ?timeC1.
+    ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.
     FILTER( xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion )
 
-    ?c2 owl:timeinfo ?timeC2.
-    ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.
+    ?c2 dsgm: timemeta ?timeC2.
+    ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.
     FILTER( xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion )
    
   }
 
   # Exclude the triple if it was revalidated in version 33
   FILTER NOT EXISTS {
-    ?c1 owl:timeinfo ?timeC1_2.
-    ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.
+    ?c1 dsgm: timemeta ?timeC1_2.
+    ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.
     FILTER( xsd:integer(?fromC1_2) <= toVersion  && xsd:integer(?toC1_2) >= toVersion )
 
-    ?c2 owl:timeinfo ?timeC2_2.
-    ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.
+    ?c2 dsgm: timemeta ?timeC2_2.
+    ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.
     FILTER( xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion )
 
   }
@@ -733,60 +733,60 @@ SELECT DISTINCT ?dataset ?modified_date FROM <BearC.ttl> WHERE {
 3: `PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT DISTINCT ?dataset ?contact ?name ?email FROM <BearC.ttl>
 WHERE {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
     ?dataset dcat:contactPoint ?c2.
-    ?c2 owl:valueAs ?contact.
+    ?c2 dsgm:objectValue ?contact.
 
     ?contact vcard:fn ?c3.
-    ?c3 owl:valueAs ?name.
+    ?c3 dsgm:objectValue ?name.
 
     OPTIONAL {
         ?contact vcard:hasEmail ?c4.
-        ?c4 owl:valueAs ?email.
+        ?c4 dsgm:objectValue ?email.
 
-        ?c4 owl:timeinfo ?timeC4.
-        ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.
+        ?c4 dsgm: timemeta ?timeC4.
+        ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.
         FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
     }
 
     # Ensure validity at version 10
- {   ?c1 owl:timeinfo ?timeC1.  
-    ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  
+ {   ?c1 dsgm: timemeta ?timeC1.  
+    ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  
     FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
 
-    ?c2 owl:timeinfo ?timeC2.  
-    ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  
+    ?c2 dsgm: timemeta ?timeC2.  
+    ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  
     FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
 
-    ?c3 owl:timeinfo ?timeC3.  
-    ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  
+    ?c3 dsgm: timemeta ?timeC3.  
+    ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  
     FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
 }
     # Exclude datasets revalidated in version 33
     FILTER NOT EXISTS {
-        ?c1 owl:timeinfo ?timeC1_2.
-        ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.
+        ?c1 dsgm: timemeta ?timeC1_2.
+        ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.
         FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
 
-        ?c2 owl:timeinfo ?timeC2_2.
-        ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.
+        ?c2 dsgm: timemeta ?timeC2_2.
+        ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.
         FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
 
-        ?c3 owl:timeinfo ?timeC3_2.
-        ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.
+        ?c3 dsgm: timemeta ?timeC3_2.
+        ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.
         FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
  
 
    
     }
 }`,
-4:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+4:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -795,35 +795,35 @@ PREFIX eu: <http://ec.europa.eu/geninfo/>
 SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution.
+    ?c3 dsgm:objectValue ?distribution.
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:license ?c5.
-    ?c5 owl:valueAs eu:legal_notices_en.htm .
+    ?c5 dsgm:objectValue eu:legal_notices_en.htm .
     FILTER regex(?title, "region")
 
  { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
 }
 
  FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <=toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <=toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
 }
 }`,
-5:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+5:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -832,64 +832,64 @@ SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE
 {
   {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Austria" .
+    ?c5 dsgm:objectValue "Austria" .
 { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
 }
 FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
  }
 }
 
 UNION
   {
      ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Germany".
+    ?c5 dsgm:objectValue "Germany".
 { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
 }
 FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
  }
 }
 
 }`,
 
-6:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+6:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -897,27 +897,27 @@ PREFIX dc: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?dataset ?title ?date FROM <BearC.ttl> WHERE {
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
     ?dataset dc:modified ?c4.
-    ?c4 owl:valueAs ?date.
+    ?c4 dsgm:objectValue ?date.
 
 { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
 }
   # Exclude if any of the 12 components were revalidated in version 33
   FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
 
     
   }
@@ -927,80 +927,80 @@ SELECT DISTINCT ?dataset ?title ?date FROM <BearC.ttl> WHERE {
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 
 SELECT DISTINCT ?dataset ?title ?distribution ?URL FROM <BearC.ttl> WHERE { 
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
     ?dataset dcat:distribution ?c4.
-    ?c4 owl:valueAs ?distribution .
+    ?c4 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c5.
-    ?c5 owl:valueAs ?URL .
+    ?c5 dsgm:objectValue ?URL .
     FILTER (?date>"2014-12-31T23:59:59"^^xsd:dateTime)
 
 { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion )
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion  && xsd:integer(?toC2) >= fromVersion )
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion  && xsd:integer(?toC3) >= fromVersion )
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion  && xsd:integer(?toC4) >= fromVersion )
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion  && xsd:integer(?toC5) >= fromVersion )
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion )
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion  && xsd:integer(?toC2) >= fromVersion )
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion  && xsd:integer(?toC3) >= fromVersion )
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion  && xsd:integer(?toC4) >= fromVersion )
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion  && xsd:integer(?toC5) >= fromVersion )
  }
   # Exclude if any of the 12 components were revalidated in version 33
   FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
     
   }
 }`,
 8:`PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?dataset ?title ?distribution ?URL ?filetitle ?description FROM <BearC.ttl> WHERE {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs "text/csv" .
+    ?c5 dsgm:objectValue "text/csv" .
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
 
 { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
-  ?c6 owl:timeinfo ?timeC6.  ?timeC6 owl:fromdate ?fromC6; owl:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
-  ?c7 owl:timeinfo ?timeC7.  ?timeC7 owl:fromdate ?fromC7; owl:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c6 dsgm: timemeta ?timeC6.  ?timeC6 dsgm:todate ?fromC6; dsgm:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
+  ?c7 dsgm: timemeta ?timeC7.  ?timeC7 dsgm:todate ?fromC7; dsgm:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
 }
   # Exclude if any of the 12 components were revalidated in version 33
   FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
-    ?c6 owl:timeinfo ?timeC6_2.  ?timeC6_2 owl:fromdate ?fromC6_2; owl:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
-    ?c7 owl:timeinfo ?timeC7_2.  ?timeC7_2 owl:fromdate ?fromC7_2; owl:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c6 dsgm: timemeta ?timeC6_2.  ?timeC6_2 dsgm:todate ?fromC6_2; dsgm:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
+    ?c7 dsgm: timemeta ?timeC7_2.  ?timeC7_2 dsgm:todate ?fromC7_2; dsgm:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)
 
     
   }
@@ -1015,63 +1015,63 @@ PREFIX dc: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?dataset ?title ?distr1 ?URL1 ?titleFile1 ?description1 ?distr2 ?URL2 ?titleFile2 ?description2 FROM <BearC.ttl>
 WHERE {
   ?dataset rdf:type ?c1.
-  ?c1 owl:valueAs dcat:Dataset.
+  ?c1 dsgm:objectValue dcat:Dataset.
   ?dataset dc:title ?c2.
-  ?c2 owl:valueAs ?title.
+  ?c2 dsgm:objectValue ?title.
 
 
   ?distr1 dcat:distribution ?c3.
-  ?c3 owl:valueAs ?dataset.
+  ?c3 dsgm:objectValue ?dataset.
   ?distr1 dcat:accessURL ?c4.
-  ?c4 owl:valueAs ?URL1.
+  ?c4 dsgm:objectValue ?URL1.
   ?distr1 dcat:mediaType ?c5.
-  ?c5 owl:valueAs "text/csv".
+  ?c5 dsgm:objectValue "text/csv".
   ?distr1 dc:title ?c6.
-  ?c6 owl:valueAs ?titleFile1.
+  ?c6 dsgm:objectValue ?titleFile1.
   ?distr1 dc:description ?c7.
-  ?c7 owl:valueAs ?description1.
+  ?c7 dsgm:objectValue ?description1.
 
 
   ?distr2 dcat:distribution ?c8.
-  ?c8 owl:valueAs ?dataset.
+  ?c8 dsgm:objectValue ?dataset.
   ?distr2 dcat:accessURL ?c9.
-  ?c9 owl:valueAs ?URL2.
+  ?c9 dsgm:objectValue ?URL2.
   ?distr2 dcat:mediaType ?c10.
-  ?c10 owl:valueAs "text/tab-separated-values".
+  ?c10 dsgm:objectValue "text/tab-separated-values".
   ?distr2 dc:title ?c11.
-  ?c11 owl:valueAs ?titleFile2.
+  ?c11 dsgm:objectValue ?titleFile2.
   ?distr2 dc:description ?c12.
-  ?c12 owl:valueAs ?description2.
+  ?c12 dsgm:objectValue ?description2.
 
  { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
-  ?c6 owl:timeinfo ?timeC6.  ?timeC6 owl:fromdate ?fromC6; owl:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
-  ?c7 owl:timeinfo ?timeC7.  ?timeC7 owl:fromdate ?fromC7; owl:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
-  ?c8 owl:timeinfo ?timeC8.  ?timeC8 owl:fromdate ?fromC8; owl:todate ?toC8.  FILTER(xsd:integer(?fromC8) <= fromVersion && xsd:integer(?toC8) >= fromVersion)
-  ?c9 owl:timeinfo ?timeC9.  ?timeC9 owl:fromdate ?fromC9; owl:todate ?toC9.  FILTER(xsd:integer(?fromC9) <= fromVersion && xsd:integer(?toC9) >= fromVersion)
-  ?c10 owl:timeinfo ?timeC10. ?timeC10 owl:fromdate ?fromC10; owl:todate ?toC10. FILTER(xsd:integer(?fromC10) <= fromVersion && xsd:integer(?toC10) >= fromVersion)
-  ?c11 owl:timeinfo ?timeC11. ?timeC11 owl:fromdate ?fromC11; owl:todate ?toC11. FILTER(xsd:integer(?fromC11) <= fromVersion && xsd:integer(?toC11) >= fromVersion)
-  ?c12 owl:timeinfo ?timeC12. ?timeC12 owl:fromdate ?fromC12; owl:todate ?toC12. FILTER(xsd:integer(?fromC12) <= fromVersion && xsd:integer(?toC12) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c6 dsgm: timemeta ?timeC6.  ?timeC6 dsgm:todate ?fromC6; dsgm:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
+  ?c7 dsgm: timemeta ?timeC7.  ?timeC7 dsgm:todate ?fromC7; dsgm:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
+  ?c8 dsgm: timemeta ?timeC8.  ?timeC8 dsgm:todate ?fromC8; dsgm:todate ?toC8.  FILTER(xsd:integer(?fromC8) <= fromVersion && xsd:integer(?toC8) >= fromVersion)
+  ?c9 dsgm: timemeta ?timeC9.  ?timeC9 dsgm:todate ?fromC9; dsgm:todate ?toC9.  FILTER(xsd:integer(?fromC9) <= fromVersion && xsd:integer(?toC9) >= fromVersion)
+  ?c10 dsgm: timemeta ?timeC10. ?timeC10 dsgm:todate ?fromC10; dsgm:todate ?toC10. FILTER(xsd:integer(?fromC10) <= fromVersion && xsd:integer(?toC10) >= fromVersion)
+  ?c11 dsgm: timemeta ?timeC11. ?timeC11 dsgm:todate ?fromC11; dsgm:todate ?toC11. FILTER(xsd:integer(?fromC11) <= fromVersion && xsd:integer(?toC11) >= fromVersion)
+  ?c12 dsgm: timemeta ?timeC12. ?timeC12 dsgm:todate ?fromC12; dsgm:todate ?toC12. FILTER(xsd:integer(?fromC12) <= fromVersion && xsd:integer(?toC12) >= fromVersion)
 }
   # Exclude if any of the 12 components were revalidated in version 33
   FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
-    ?c6 owl:timeinfo ?timeC6_2.  ?timeC6_2 owl:fromdate ?fromC6_2; owl:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
-    ?c7 owl:timeinfo ?timeC7_2.  ?timeC7_2 owl:fromdate ?fromC7_2; owl:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)
-    ?c8 owl:timeinfo ?timeC8_2.  ?timeC8_2 owl:fromdate ?fromC8_2; owl:todate ?toC8_2.  FILTER(xsd:integer(?fromC8_2) <= toVersion && xsd:integer(?toC8_2) >= toVersion)
-    ?c9 owl:timeinfo ?timeC9_2.  ?timeC9_2 owl:fromdate ?fromC9_2; owl:todate ?toC9_2.  FILTER(xsd:integer(?fromC9_2) <= toVersion && xsd:integer(?toC9_2) >= toVersion)
-    ?c10 owl:timeinfo ?timeC10_2.  ?timeC10_2 owl:fromdate ?fromC10_2; owl:todate ?toC10_2.  FILTER(xsd:integer(?fromC10_2) <= toVersion && xsd:integer(?toC10_2) >= toVersion)
-    ?c11 owl:timeinfo ?timeC11_2.  ?timeC11_2 owl:fromdate ?fromC11_2; owl:todate ?toC11_2.  FILTER(xsd:integer(?fromC11_2) <= toVersion && xsd:integer(?toC11_2) >= toVersion)
-    ?c12 owl:timeinfo ?timeC12_2.  ?timeC12_2 owl:fromdate ?fromC12_2; owl:todate ?toC12_2.  FILTER(xsd:integer(?fromC12_2) <= toVersion && xsd:integer(?toC12_2) >= toVersion)
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c6 dsgm: timemeta ?timeC6_2.  ?timeC6_2 dsgm:todate ?fromC6_2; dsgm:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
+    ?c7 dsgm: timemeta ?timeC7_2.  ?timeC7_2 dsgm:todate ?fromC7_2; dsgm:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)
+    ?c8 dsgm: timemeta ?timeC8_2.  ?timeC8_2 dsgm:todate ?fromC8_2; dsgm:todate ?toC8_2.  FILTER(xsd:integer(?fromC8_2) <= toVersion && xsd:integer(?toC8_2) >= toVersion)
+    ?c9 dsgm: timemeta ?timeC9_2.  ?timeC9_2 dsgm:todate ?fromC9_2; dsgm:todate ?toC9_2.  FILTER(xsd:integer(?fromC9_2) <= toVersion && xsd:integer(?toC9_2) >= toVersion)
+    ?c10 dsgm: timemeta ?timeC10_2.  ?timeC10_2 dsgm:todate ?fromC10_2; dsgm:todate ?toC10_2.  FILTER(xsd:integer(?fromC10_2) <= toVersion && xsd:integer(?toC10_2) >= toVersion)
+    ?c11 dsgm: timemeta ?timeC11_2.  ?timeC11_2 dsgm:todate ?fromC11_2; dsgm:todate ?toC11_2.  FILTER(xsd:integer(?fromC11_2) <= toVersion && xsd:integer(?toC11_2) >= toVersion)
+    ?c12 dsgm: timemeta ?timeC12_2.  ?timeC12_2 dsgm:todate ?fromC12_2; dsgm:todate ?toC12_2.  FILTER(xsd:integer(?fromC12_2) <= toVersion && xsd:integer(?toC12_2) >= toVersion)
 
     
   }
@@ -1079,49 +1079,49 @@ WHERE {
 10:`PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?dataset ?title ?distribution ?URL ?mediaType ?filetitle ?description FROM <BearC.ttl> WHERE 
 {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs ?mediaType .
+    ?c5 dsgm:objectValue ?mediaType .
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
  { 
-  ?c1 owl:timeinfo ?timeC1.  ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
-  ?c2 owl:timeinfo ?timeC2.  ?timeC2 owl:fromdate ?fromC2; owl:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
-  ?c3 owl:timeinfo ?timeC3.  ?timeC3 owl:fromdate ?fromC3; owl:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
-  ?c4 owl:timeinfo ?timeC4.  ?timeC4 owl:fromdate ?fromC4; owl:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
-  ?c5 owl:timeinfo ?timeC5.  ?timeC5 owl:fromdate ?fromC5; owl:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
-  ?c6 owl:timeinfo ?timeC6.  ?timeC6 owl:fromdate ?fromC6; owl:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
-  ?c7 owl:timeinfo ?timeC7.  ?timeC7 owl:fromdate ?fromC7; owl:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
+  ?c1 dsgm: timemeta ?timeC1.  ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.  FILTER(xsd:integer(?fromC1) <= fromVersion && xsd:integer(?toC1) >= fromVersion)
+  ?c2 dsgm: timemeta ?timeC2.  ?timeC2 dsgm:todate ?fromC2; dsgm:todate ?toC2.  FILTER(xsd:integer(?fromC2) <= fromVersion && xsd:integer(?toC2) >= fromVersion)
+  ?c3 dsgm: timemeta ?timeC3.  ?timeC3 dsgm:todate ?fromC3; dsgm:todate ?toC3.  FILTER(xsd:integer(?fromC3) <= fromVersion && xsd:integer(?toC3) >= fromVersion)
+  ?c4 dsgm: timemeta ?timeC4.  ?timeC4 dsgm:todate ?fromC4; dsgm:todate ?toC4.  FILTER(xsd:integer(?fromC4) <= fromVersion && xsd:integer(?toC4) >= fromVersion)
+  ?c5 dsgm: timemeta ?timeC5.  ?timeC5 dsgm:todate ?fromC5; dsgm:todate ?toC5.  FILTER(xsd:integer(?fromC5) <= fromVersion && xsd:integer(?toC5) >= fromVersion)
+  ?c6 dsgm: timemeta ?timeC6.  ?timeC6 dsgm:todate ?fromC6; dsgm:todate ?toC6.  FILTER(xsd:integer(?fromC6) <= fromVersion && xsd:integer(?toC6) >= fromVersion)
+  ?c7 dsgm: timemeta ?timeC7.  ?timeC7 dsgm:todate ?fromC7; dsgm:todate ?toC7.  FILTER(xsd:integer(?fromC7) <= fromVersion && xsd:integer(?toC7) >= fromVersion)
 }
   # Exclude if any of the 12 components were revalidated in version 33
   FILTER NOT EXISTS {
 
-    ?c1 owl:timeinfo ?timeC1_2.  ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
-    ?c2 owl:timeinfo ?timeC2_2.  ?timeC2_2 owl:fromdate ?fromC2_2; owl:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
-    ?c3 owl:timeinfo ?timeC3_2.  ?timeC3_2 owl:fromdate ?fromC3_2; owl:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
-    ?c4 owl:timeinfo ?timeC4_2.  ?timeC4_2 owl:fromdate ?fromC4_2; owl:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
-    ?c5 owl:timeinfo ?timeC5_2.  ?timeC5_2 owl:fromdate ?fromC5_2; owl:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
-    ?c6 owl:timeinfo ?timeC6_2.  ?timeC6_2 owl:fromdate ?fromC6_2; owl:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
-    ?c7 owl:timeinfo ?timeC7_2.  ?timeC7_2 owl:fromdate ?fromC7_2; owl:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)    
+    ?c1 dsgm: timemeta ?timeC1_2.  ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.  FILTER(xsd:integer(?fromC1_2) <= toVersion && xsd:integer(?toC1_2) >= toVersion)
+    ?c2 dsgm: timemeta ?timeC2_2.  ?timeC2_2 dsgm:todate ?fromC2_2; dsgm:todate ?toC2_2.  FILTER(xsd:integer(?fromC2_2) <= toVersion && xsd:integer(?toC2_2) >= toVersion)
+    ?c3 dsgm: timemeta ?timeC3_2.  ?timeC3_2 dsgm:todate ?fromC3_2; dsgm:todate ?toC3_2.  FILTER(xsd:integer(?fromC3_2) <= toVersion && xsd:integer(?toC3_2) >= toVersion)
+    ?c4 dsgm: timemeta ?timeC4_2.  ?timeC4_2 dsgm:todate ?fromC4_2; dsgm:todate ?toC4_2.  FILTER(xsd:integer(?fromC4_2) <= toVersion && xsd:integer(?toC4_2) >= toVersion)
+    ?c5 dsgm: timemeta ?timeC5_2.  ?timeC5_2 dsgm:todate ?fromC5_2; dsgm:todate ?toC5_2.  FILTER(xsd:integer(?fromC5_2) <= toVersion && xsd:integer(?toC5_2) >= toVersion)
+    ?c6 dsgm: timemeta ?timeC6_2.  ?timeC6_2 dsgm:todate ?fromC6_2; dsgm:todate ?toC6_2.  FILTER(xsd:integer(?fromC6_2) <= toVersion && xsd:integer(?toC6_2) >= toVersion)
+    ?c7 dsgm: timemeta ?timeC7_2.  ?timeC7_2 dsgm:todate ?fromC7_2; dsgm:todate ?toC7_2.  FILTER(xsd:integer(?fromC7_2) <= toVersion && xsd:integer(?toC7_2) >= toVersion)    
   }
 } ORDER BY ?filetitle
 LIMIT 100 OFFSET 100`
 },
 
-  vq: {1:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+  vq: {1:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1131,11 +1131,11 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
  
    ?dataset rdf:type ?c1.
-     ?c1 owl:valueAs dcat:Dataset.
+     ?c1 dsgm:objectValue dcat:Dataset.
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1144,11 +1144,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
     BIND(?to1 AS ?to)
  
      ?dataset dcat:distribution ?c2.
-      ?c2 owl:valueAs ?distribution.
+      ?c2 dsgm:objectValue ?distribution.
  OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dcat:distribution AS ?property)
@@ -1157,12 +1157,12 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
     BIND(?to2 AS ?to)
 
 ?distribution dcat:accessURL ?c3.
-    ?c3 owl:valueAs ?URL .
- ?c3 owl:valueAs ?date.
+    ?c3 dsgm:objectValue ?URL .
+ ?c3 dsgm:objectValue ?date.
     OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate   ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate   ?to3.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1172,7 +1172,7 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
 
 }`,
 
-2:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+2:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1181,12 +1181,12 @@ PREFIX dc: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
  
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
 
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1197,11 +1197,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
 
 
     ?dataset dc:modified ?c2.
-    ?c2 owl:valueAs ?modified_date .  
+    ?c2 dsgm:objectValue ?modified_date .  
   OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:modified AS ?property)
@@ -1215,7 +1215,7 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to  FROM <BearC.ttl> WHERE {
 3:`PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
@@ -1223,12 +1223,12 @@ WHERE {
 
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
 
  OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1239,11 +1239,11 @@ WHERE {
 
 
     ?dataset dcat:contactPoint ?c2.
-    ?c2 owl:valueAs ?contact.
+    ?c2 dsgm:objectValue ?contact.
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dcat:contactPoint AS ?property)
@@ -1252,12 +1252,12 @@ OPTIONAL {
     BIND(?to2 AS ?to)
 
     ?contact vcard:fn ?c3.
-    ?c3 owl:valueAs ?name.
+    ?c3 dsgm:objectValue ?name.
 
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?contact AS ?subject)
@@ -1269,10 +1269,10 @@ OPTIONAL {
 
     OPTIONAL {
         ?contact vcard:hasEmail ?c4.
-        ?c4 owl:valueAs ?email.
+        ?c4 dsgm:objectValue ?email.
 
-        ?c4 owl:timeinfo ?timeC4.
-        ?timeC4 owl:fromdate ?from4; owl:todate ?to4.
+        ?c4 dsgm: timemeta ?timeC4.
+        ?timeC4 dsgm:todate ?from4; dsgm:todate ?to4.
         
     }
     BIND(?contact AS ?subject)
@@ -1284,7 +1284,7 @@ OPTIONAL {
 
  
 }`,
-4:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+4:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1294,12 +1294,12 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
  WHERE {
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
    
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1309,11 +1309,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
 
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1323,11 +1323,11 @@ OPTIONAL {
 
 
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution.
+    ?c3 dsgm:objectValue ?distribution.
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1337,11 +1337,11 @@ OPTIONAL {
     BIND(?to3 AS ?to)
 
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
     OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1350,12 +1350,12 @@ OPTIONAL {
     BIND(?to4 AS ?to)
 
     ?distribution dc:license ?c5.
-    ?c5 owl:valueAs eu:legal_notices_en.htm .
+    ?c5 dsgm:objectValue eu:legal_notices_en.htm .
 
    OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:license AS ?property)
@@ -1377,12 +1377,12 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
 {
 {
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
 
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1391,11 +1391,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl>
     BIND(?to1 AS ?to)
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1405,11 +1405,11 @@ OPTIONAL {
 
 
    ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1420,11 +1420,11 @@ OPTIONAL {
 
 
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
  OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1434,11 +1434,11 @@ OPTIONAL {
 
 
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Austria" .
+    ?c5 dsgm:objectValue "Austria" .
  OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:description AS ?property)
@@ -1451,12 +1451,12 @@ OPTIONAL {
 UNION{
 
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
 
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1465,11 +1465,11 @@ UNION{
     BIND(?to1 AS ?to)
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1478,11 +1478,11 @@ OPTIONAL {
     BIND(?to2 AS ?to)
 
    ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1493,11 +1493,11 @@ OPTIONAL {
 
 {
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
  OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1507,11 +1507,11 @@ OPTIONAL {
 
 
     ?distribution dc:description ?c5.
-    ?c5 owl:valueAs "Germany" .
+    ?c5 dsgm:objectValue "Germany" .
  OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:description AS ?property)
@@ -1525,7 +1525,7 @@ OPTIONAL {
    
 
 }`,
-6:`PREFIX owl: <http://www.w3.org/2002/07/owl/>
+6:`PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1534,11 +1534,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
 
     
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1547,11 +1547,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
     BIND(?to1 AS ?to)
   
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
   
               }
     BIND(?dataset AS ?subject)
@@ -1563,12 +1563,12 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
 
   
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
 
     OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1579,11 +1579,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
  
 
     ?dataset dc:modified ?c4.
-    ?c4 owl:valueAs ?date.
+    ?c4 dsgm:objectValue ?date.
 OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:modified AS ?property)
@@ -1598,17 +1598,17 @@ OPTIONAL {
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 
 SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE 
 { 
   
     ?dataset rdf:type ?c1.
-    ?c1 owl:valueAs dcat:Dataset .
+    ?c1 dsgm:objectValue dcat:Dataset .
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1617,11 +1617,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE
     BIND(?to1 AS ?to)
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
     OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1631,12 +1631,12 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE
   
 
     ?dataset dc:issued ?c3.
-    ?c3 owl:valueAs ?date .
+    ?c3 dsgm:objectValue ?date .
 
     OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1647,11 +1647,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE
  
 
     ?dataset dcat:distribution ?c4.
-    ?c4 owl:valueAs ?distribution.
+    ?c4 dsgm:objectValue ?distribution.
     OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?dataset AS ?subject)
     BIND(dcat:distribution AS ?property)
@@ -1662,11 +1662,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE
 
 
     ?distribution dcat:accessURL ?c5.
-    ?c5 owl:valueAs ?URL .
+    ?c5 dsgm:objectValue ?URL .
     OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1680,16 +1680,16 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE
 8:`PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
   
     ?dataset rdf:type ?c1. 
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
    OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1698,11 +1698,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
     BIND(?to1 AS ?to)
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1713,11 +1713,11 @@ OPTIONAL {
 
 
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -1728,11 +1728,11 @@ OPTIONAL {
 
 
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
 OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1743,11 +1743,11 @@ OPTIONAL {
 
 
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs "text/csv" .
+    ?c5 dsgm:objectValue "text/csv" .
 OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:mediaType AS ?property)
@@ -1758,11 +1758,11 @@ OPTIONAL {
 
 
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
 OPTIONAL { 
-      ?c6 owl:timeinfo ?timeC6.
-      ?timeC6 owl:fromdate ?from6; 
-              owl:todate   ?to6.
+      ?c6 dsgm: timemeta ?timeC6.
+      ?timeC6 dsgm:todate ?from6; 
+              dsgm:todate   ?to6.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:title AS ?property)
@@ -1772,11 +1772,11 @@ OPTIONAL {
 
 
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
 OPTIONAL { 
-      ?c7 owl:timeinfo ?timeC7.
-      ?timeC7 owl:fromdate ?from7; 
-              owl:todate   ?to7.
+      ?c7 dsgm: timemeta ?timeC7.
+      ?timeC7 dsgm:todate ?from7; 
+              dsgm:todate   ?to7.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:description AS ?property)
@@ -1798,13 +1798,13 @@ WHERE {
 
 
   ?dataset rdf:type ?c1.
-  ?c1 owl:valueAs dcat:Dataset.
+  ?c1 dsgm:objectValue dcat:Dataset.
  
-   ?c1 owl:valueAs dcat:Dataset.
+   ?c1 dsgm:objectValue dcat:Dataset.
     OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1816,11 +1816,11 @@ WHERE {
 
     
   ?dataset dc:title ?c2.
-  ?c2 owl:valueAs ?title.
+  ?c2 dsgm:objectValue ?title.
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -1830,11 +1830,11 @@ OPTIONAL {
 
 
   ?distr1 dcat:distribution ?c3.
-  ?c3 owl:valueAs ?dataset.
+  ?c3 dsgm:objectValue ?dataset.
   OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?distr1 AS ?subject)
@@ -1845,11 +1845,11 @@ OPTIONAL {
 
     
   ?distr1 dcat:accessURL ?c4.
-  ?c4 owl:valueAs ?URL1.
+  ?c4 dsgm:objectValue ?URL1.
 OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distr1 AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1859,11 +1859,11 @@ OPTIONAL {
 
 
   ?distr1 dcat:mediaType ?c5.
-  ?c5 owl:valueAs "text/csv".
+  ?c5 dsgm:objectValue "text/csv".
 OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distr1 AS ?subject)
     BIND(dcat:mediaType AS ?property)
@@ -1873,11 +1873,11 @@ OPTIONAL {
  
 
   ?distr1 dc:title ?c6.
-  ?c6 owl:valueAs ?titleFile1.
+  ?c6 dsgm:objectValue ?titleFile1.
 OPTIONAL { 
-      ?c6 owl:timeinfo ?timeC6.
-      ?timeC6 owl:fromdate ?from6; 
-              owl:todate   ?to6.
+      ?c6 dsgm: timemeta ?timeC6.
+      ?timeC6 dsgm:todate ?from6; 
+              dsgm:todate   ?to6.
     }
     BIND(?distr1 AS ?subject)
     BIND(dc:title AS ?property)
@@ -1887,11 +1887,11 @@ OPTIONAL {
  
     
   ?distr1 dc:description ?c7.
-  ?c7 owl:valueAs ?description1.
+  ?c7 dsgm:objectValue ?description1.
 OPTIONAL { 
-      ?c7 owl:timeinfo ?timeC7.
-      ?timeC7 owl:fromdate ?from7; 
-              owl:todate   ?to7.
+      ?c7 dsgm: timemeta ?timeC7.
+      ?timeC7 dsgm:todate ?from7; 
+              dsgm:todate   ?to7.
     }
     BIND(?distr1 AS ?subject)
     BIND(dc:description AS ?property)
@@ -1902,11 +1902,11 @@ OPTIONAL {
 
 
   ?distr2 dcat:distribution ?c8.
-  ?c8 owl:valueAs ?dataset.
+  ?c8 dsgm:objectValue ?dataset.
 OPTIONAL { 
-      ?c8 owl:timeinfo ?timeC8.
-      ?timeC8 owl:fromdate ?from8; 
-              owl:todate   ?to8.
+      ?c8 dsgm: timemeta ?timeC8.
+      ?timeC8 dsgm:todate ?from8; 
+              dsgm:todate   ?to8.
     }
     BIND(?distr2 AS ?subject)
     BIND(dcat:distribution AS ?property)
@@ -1916,11 +1916,11 @@ OPTIONAL {
 
 
   ?distr2 dcat:accessURL ?c9.
-  ?c9 owl:valueAs ?URL2.
+  ?c9 dsgm:objectValue ?URL2.
 OPTIONAL { 
-      ?c9 owl:timeinfo ?timeC9.
-      ?timeC9 owl:fromdate ?from9; 
-              owl:todate   ?to9.
+      ?c9 dsgm: timemeta ?timeC9.
+      ?timeC9 dsgm:todate ?from9; 
+              dsgm:todate   ?to9.
     }
     BIND(?distr2 AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -1931,11 +1931,11 @@ OPTIONAL {
  
 
   ?distr2 dcat:mediaType ?c10.
-  ?c10 owl:valueAs "text/tab-separated-values".
+  ?c10 dsgm:objectValue "text/tab-separated-values".
 OPTIONAL { 
-      ?c10 owl:timeinfo ?timeC10.
-      ?timeC10 owl:fromdate ?from10; 
-              owl:todate   ?to10.
+      ?c10 dsgm: timemeta ?timeC10.
+      ?timeC10 dsgm:todate ?from10; 
+              dsgm:todate   ?to10.
     }
     BIND(?distr2 AS ?subject)
     BIND(dcat:mediaType AS ?property)
@@ -1945,11 +1945,11 @@ OPTIONAL {
 
 
   ?distr2 dc:title ?c11.
-  ?c11 owl:valueAs ?titleFile2.
+  ?c11 dsgm:objectValue ?titleFile2.
 OPTIONAL { 
-      ?c11 owl:timeinfo ?timeC11.
-      ?timeC11 owl:fromdate ?from11; 
-              owl:todate   ?to11.
+      ?c11 dsgm: timemeta ?timeC11.
+      ?timeC11 dsgm:todate ?from11; 
+              dsgm:todate   ?to11.
     }
     BIND(?distr2 AS ?subject)
     BIND(dc:title AS ?property)
@@ -1959,11 +1959,11 @@ OPTIONAL {
  
 
   ?distr2 dc:description ?c12.
-  ?c12 owl:valueAs ?description2.
+  ?c12 dsgm:objectValue ?description2.
 OPTIONAL { 
-      ?c12 owl:timeinfo ?timeC12.
-      ?timeC12 owl:fromdate ?from12; 
-              owl:todate   ?to12.
+      ?c12 dsgm: timemeta ?timeC12.
+      ?timeC12 dsgm:todate ?from12; 
+              dsgm:todate   ?to12.
     }
     BIND(?distr2 AS ?subject)
     BIND(dc:description AS ?property)
@@ -1978,17 +1978,17 @@ OPTIONAL {
 10:`PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dc: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
   
 
   ?dataset rdf:type ?c1. 
-    ?c1 owl:valueAs dcat:Dataset.
+    ?c1 dsgm:objectValue dcat:Dataset.
    OPTIONAL { 
-      ?c1 owl:timeinfo ?timeC1.
-      ?timeC1 owl:fromdate ?from1; 
-              owl:todate   ?to1.
+      ?c1 dsgm: timemeta ?timeC1.
+      ?timeC1 dsgm:todate ?from1; 
+              dsgm:todate   ?to1.
     }
     BIND(?dataset AS ?subject)
     BIND(rdf:type AS ?property)
@@ -1999,11 +1999,11 @@ SELECT DISTINCT ?subject ?property ?value ?from ?to FROM <BearC.ttl> WHERE {
 
 
     ?dataset dc:title ?c2.
-    ?c2 owl:valueAs ?title .
+    ?c2 dsgm:objectValue ?title .
 OPTIONAL { 
-      ?c2 owl:timeinfo ?timeC2.
-      ?timeC2 owl:fromdate ?from2; 
-              owl:todate   ?to2.
+      ?c2 dsgm: timemeta ?timeC2.
+      ?timeC2 dsgm:todate ?from2; 
+              dsgm:todate   ?to2.
     }
     BIND(?dataset AS ?subject)
     BIND(dc:title AS ?property)
@@ -2013,11 +2013,11 @@ OPTIONAL {
 
 
     ?dataset dcat:distribution ?c3.
-    ?c3 owl:valueAs ?distribution .
+    ?c3 dsgm:objectValue ?distribution .
 OPTIONAL { 
-      ?c3 owl:timeinfo ?timeC3.
-      ?timeC3 owl:fromdate ?from3; 
-              owl:todate  ?to3.
+      ?c3 dsgm: timemeta ?timeC3.
+      ?timeC3 dsgm:todate ?from3; 
+              dsgm:todate  ?to3.
     }
 
     BIND(?dataset AS ?subject)
@@ -2028,11 +2028,11 @@ OPTIONAL {
 
 
     ?distribution dcat:accessURL ?c4.
-    ?c4 owl:valueAs ?URL .
+    ?c4 dsgm:objectValue ?URL .
 OPTIONAL { 
-      ?c4 owl:timeinfo ?timeC4.
-      ?timeC4 owl:fromdate ?from4; 
-              owl:todate   ?to4.
+      ?c4 dsgm: timemeta ?timeC4.
+      ?timeC4 dsgm:todate ?from4; 
+              dsgm:todate   ?to4.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:accessURL AS ?property)
@@ -2043,11 +2043,11 @@ OPTIONAL {
 
 
     ?distribution dcat:mediaType ?c5.
-    ?c5 owl:valueAs ?mediatype .
+    ?c5 dsgm:objectValue ?mediatype .
 OPTIONAL { 
-      ?c5 owl:timeinfo ?timeC5.
-      ?timeC5 owl:fromdate ?from5; 
-              owl:todate   ?to5.
+      ?c5 dsgm: timemeta ?timeC5.
+      ?timeC5 dsgm:todate ?from5; 
+              dsgm:todate   ?to5.
     }
     BIND(?distribution AS ?subject)
     BIND(dcat:mediaType AS ?property)
@@ -2058,11 +2058,11 @@ OPTIONAL {
 
 
     ?distribution dc:title ?c6.
-    ?c6 owl:valueAs ?filetitle .
+    ?c6 dsgm:objectValue ?filetitle .
 OPTIONAL { 
-      ?c6 owl:timeinfo ?timeC6.
-      ?timeC6 owl:fromdate ?from6; 
-              owl:todate   ?to6.
+      ?c6 dsgm: timemeta ?timeC6.
+      ?timeC6 dsgm:todate ?from6; 
+              dsgm:todate   ?to6.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:title AS ?property)
@@ -2072,11 +2072,11 @@ OPTIONAL {
 
 
     ?distribution dc:description ?c7.
-    ?c7 owl:valueAs ?description .
+    ?c7 dsgm:objectValue ?description .
 OPTIONAL { 
-      ?c7 owl:timeinfo ?timeC7.
-      ?timeC7 owl:fromdate ?from7; 
-              owl:todate   ?to7.
+      ?c7 dsgm: timemeta ?timeC7.
+      ?timeC7 dsgm:todate ?from7; 
+              dsgm:todate   ?to7.
     }
     BIND(?distribution AS ?subject)
     BIND(dc:description AS ?property)
@@ -2110,44 +2110,44 @@ function generateBearBQuery(pp, oo=null, queryType, version1, version2=null, dat
  if (datasetType === "instant"){
 if(queryType === "vm") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?s ?o ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:valueAs ${oo}.` : "?c1 owl:valueAs ?o."}
-  ?c1 owl:timeinfo ?time.
-  ?time owl:fromdate ?fromdate; owl:todate ?todate.
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
+  ?c1 dsgm: timemeta ?time.
+  ?time dsgm:todate ?fromdate; dsgm:todate ?todate.
   FILTER((xsd:integer(?fromdate) <= ${version1}) && (xsd:integer(?todate) >= ${version1}))
 }`;
   } 
   else if(queryType === "dm") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:valueAs ${oo}.` : "?c1 owl:valueAs ?o."}
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
   {
-    ?c1 owl:timeinfo ?timeC1.
-    ?timeC1 owl:fromdate ?fromC1; owl:todate ?toC1.
+    ?c1 dsgm: timemeta ?timeC1.
+    ?timeC1 dsgm:todate ?fromC1; dsgm:todate ?toC1.
     FILTER(xsd:integer(?fromC1) <= ${version1} && xsd:integer(?toC1) >= ${version1})
   }
   FILTER NOT EXISTS {
-    ?c1 owl:timeinfo ?timeC1_2.
-    ?timeC1_2 owl:fromdate ?fromC1_2; owl:todate ?toC1_2.
+    ?c1 dsgm: timemeta ?timeC1_2.
+    ?timeC1_2 dsgm:todate ?fromC1_2; dsgm:todate ?toC1_2.
     FILTER(xsd:integer(?fromC1_2) <= ${version2} && xsd:integer(?toC1_2) >= ${version2})
   }
 }`;
   } 
   else if(queryType === "vq") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:valueAs ${oo}.` : "?c1 owl:valueAs ?o."}
-  ?c1 owl:timeinfo ?time.
-  ?time owl:fromdate ?fromdate; owl:todate ?todate.
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
+  ?c1 dsgm: timemeta ?time.
+  ?time dsgm:todate ?fromdate; dsgm:todate ?todate.
 }`;
   }
 
@@ -2157,7 +2157,7 @@ SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
 else{
   if(queryType === "vm") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX bike: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?s ?o ${fromClause} WHERE {
@@ -2170,7 +2170,7 @@ SELECT ?s ?o ${fromClause} WHERE {
   } 
   else if(queryType === "dm") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX bike: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
@@ -2190,7 +2190,7 @@ SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   } 
   else if(queryType === "vq") {
     return `
-PREFIX owl: <http://www.w3.org/2002/07/owl/>
+PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX bike: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
