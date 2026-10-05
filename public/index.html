@@ -183,10 +183,49 @@ button:hover {
   margin-left: 10px;
 }
 
+/* Side note (right side) */
+.side-note {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 220px;
+  background: #fff8e1;
+  border-left: 4px solid #ffb300;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.side-note code {
+  background: #fff;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* On narrow screens, show the note inline instead of floating */
+@media (max-width: 1250px) {
+  .side-note {
+    position: static;
+    width: auto;
+    max-width: 900px;
+    margin: 10px auto;
+  }
+}
+
 
 </style>
 </head>
 <body>
+
+<div class="side-note">
+    <strong>Note:</strong> By default, <code>dsgm:objectValue</code> is used in the queries.
+    For any query where it is needed, adjust it to <code>dsgm:literalValue</code>.
+</div>
+
 <div class="container">
     <h1>DSGM: A Knowledge Graph Evolution Management Tool</h1>
 
