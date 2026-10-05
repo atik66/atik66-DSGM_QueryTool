@@ -2158,11 +2158,10 @@ else{
   if(queryType === "vm") {
     return `
 PREFIX dsgm: <http://www.bike-csecu.com/version/>
-
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?s ?o ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
   ?c1 dsgm:timemeta ?time.
   ?time dsgm:fromdate ?fromdate; dsgm:todate ?todate.
   FILTER((xsd:integer(?fromdate) <= ${version1}) && (xsd:integer(?todate) >= ${version1}))
@@ -2174,7 +2173,7 @@ PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
   {
     ?c1 dsgm:timemeta ?timeC1.
     ?timeC1 dsgm:fromdate ?fromC1; dsgm:todate ?toC1.
@@ -2193,7 +2192,7 @@ PREFIX dsgm: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
-  ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
+  ${oo ? `?c1 dsgm:objectValue ${oo}.` : "?c1 dsgm:objectValue ?o."}
   ?c1 dsgm:timemeta ?time.
   ?time dsgm:fromdate ?fromdate; dsgm:todate ?todate.
 }`;
