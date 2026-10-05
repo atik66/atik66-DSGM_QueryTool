@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   const { query } = req.body;
-  const virtuosoEndpoint = "http://bike-csecu.com:8890/sparql/";
+  const virtuosoEndpoint = "http://103.94.129.60:8896/sparql";
 
   try {
     const response = await fetch(virtuosoEndpoint, {
