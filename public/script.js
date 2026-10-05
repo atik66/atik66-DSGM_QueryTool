@@ -2158,32 +2158,31 @@ else{
   if(queryType === "vm") {
     return `
 PREFIX dsgm: <http://www.bike-csecu.com/version/>
-PREFIX bike: <http://www.bike-csecu.com/version/>
+
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?s ?o ${fromClause} WHERE {
   ?s ${pp} ?c1.
   ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
-  ?c1 bike:timemeta ?time.
-  ?time bike:fromdate ?fromdate; bike:todate ?todate.
+  ?c1 dsgm:timemeta ?time.
+  ?time dsgm:fromdate ?fromdate; dsgm:todate ?todate.
   FILTER((xsd:integer(?fromdate) <= ${version1}) && (xsd:integer(?todate) >= ${version1}))
 }`;
   } 
   else if(queryType === "dm") {
     return `
 PREFIX dsgm: <http://www.bike-csecu.com/version/>
-PREFIX bike: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
   ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
   {
-    ?c1 bike:timemeta ?timeC1.
-    ?timeC1 bike:fromdate ?fromC1; bike:todate ?toC1.
+    ?c1 dsgm:timemeta ?timeC1.
+    ?timeC1 dsgm:fromdate ?fromC1; dsgm:todate ?toC1.
     FILTER(xsd:integer(?fromC1) <= ${version1} && xsd:integer(?toC1) >= ${version1})
   }
   FILTER NOT EXISTS {
-    ?c1 bike:timemeta ?timeC1_2.
-    ?timeC1_2 bike:fromdate ?fromC1_2; bike:todate ?toC1_2.
+    ?c1 dsgm:timemeta ?timeC1_2.
+    ?timeC1_2 dsgm:fromdate ?fromC1_2; dsgm:todate ?toC1_2.
     FILTER(xsd:integer(?fromC1_2) <= ${version2} && xsd:integer(?toC1_2) >= ${version2})
   }
 }`;
@@ -2191,13 +2190,12 @@ SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   else if(queryType === "vq") {
     return `
 PREFIX dsgm: <http://www.bike-csecu.com/version/>
-PREFIX bike: <http://www.bike-csecu.com/version/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT (COUNT(*) AS ?count) ${fromClause} WHERE {
   ?s ${pp} ?c1.
   ${oo ? `?c1 owl:sameAs ${oo}.` : "?c1 owl:sameAs ?o."}
-  ?c1 bike:timemeta ?time.
-  ?time bike:fromdate ?fromdate; bike:todate ?todate.
+  ?c1 dsgm:timemeta ?time.
+  ?time dsgm:fromdate ?fromdate; dsgm:todate ?todate.
 }`;
   }
 }
