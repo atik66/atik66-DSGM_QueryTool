@@ -2331,7 +2331,7 @@ function displaySelectedQuery(){
     if(queryType === "dm"){
         query = query.replace(/fromVersion/g, version1).replace(/toVersion/g, version2);
     } else if (queryType === "vm"){
-        query = query.replace(/(?<![\/\w])version(?![\w\/])/g, version1);
+        query = query.replace(/version/g, version1);
     }
     else{
         query=query;
